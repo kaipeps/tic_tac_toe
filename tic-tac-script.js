@@ -8,23 +8,11 @@ var midRow = Array.from(document.querySelectorAll('.mid'))
 var botRow = Array.from(document.querySelectorAll('.bot'))
 var gameGrid = [topRow, midRow, botRow]
 
+// Functions to check row/column/diagonal win conditions
 function rowCheck() {
     var checkCount = 0
     for (y = 0; y < 3; y++) {
-        if (gameGrid[x][y].classList.contains(currentTurn) === true) {
-            checkCount++
-        }
-    }
-    if (checkCount === 3) {
-        winStatus = currentTurn
-        return
-    } else {
-        checkCount = 0
-    }
-}
-function colCheck() {
-    var checkCount = 0
-    for (x = 0; x < 3; x++) {
+        console.log('x' + x + ', y' + y)
         if (gameGrid[x][y].classList.contains(currentTurn) === true) {
             checkCount++
             console.log(checkCount)
@@ -33,14 +21,27 @@ function colCheck() {
     if (checkCount === 3) {
         winStatus = currentTurn
         return
-    } else {
-        checkCount = 0
+    }
+}
+function colCheck() {
+    var checkCount = 0
+    for (x = 0; x < 3; x++) {
+        console.log('x' + x + ', y' + y)
+        if (gameGrid[x][y].classList.contains(currentTurn) === true) {
+            checkCount++
+            console.log(checkCount)
+        }
+    }
+    if (checkCount === 3) {
+        winStatus = currentTurn
+        return
     }
 }
 function diagCheck() {
     var checkCount = 0
     // Forward Diagonal
     for (d = 0; d < 3; d++) {
+        console.log('x' + d + ', y' + d)
         if (gameGrid[d][d].classList.contains(currentTurn) === true) {
             checkCount++
             console.log(checkCount)
@@ -53,20 +54,52 @@ function diagCheck() {
         checkCount = 0
     }
     // Backward Diagonal
+    var y = 2
     for (x = 0; x < 3; x++) {
-        for (y = 2; y >= 0; y--) {
-            if (gameGrid[x][y].classList.contains(currentTurn) === true) {
-                checkCount++
-                console.log(checkCount)
-            }
+        console.log('x' + x + ', y' + y)
+        if (gameGrid[x][y].classList.contains(currentTurn) === true) {
+            checkCount++
+            console.log(checkCount)
         }
+        y--
     }
     if (checkCount === 3) {
         winStatus = currentTurn
         return
-    } else {
-        checkCount = 0
     }
+}
+
+function checkForDraw() {
+    var lockCount = 0
+    for (i = 0; i < gameBox.children.length; i++) {
+        if (gameBox.children[i].classList.contains('locked')) {
+            lockCount++
+        }
+    }
+    if (lockCount === 9) {
+        winStatus = 'draw'
+    }
+}
+
+function checkForWin() {
+    for (x = 0; x < 3; x++) {
+        rowCheck()
+    }
+    if (winStatus !== 'none') {
+        return
+    }
+    for (y = 0; y < 3; y++) {
+        colCheck()
+    }
+    if (winStatus !== 'none') {
+        return
+    }
+    diagCheck()
+}
+
+function onDraw() {
+    gameText.style.textAlign = 'center'
+    gameText.textContent = "It's a draw!"
 }
 
 function onWin() {
@@ -82,24 +115,6 @@ function onWin() {
     }
 }
 
-function checkForWin() {
-    for (x = 0; x < 3; x++) {
-        console.log('row check')
-        rowCheck()
-    }
-    if (winStatus !== 'none') {
-        return
-    }
-    for (y = 0; y < 3; y++) {
-        console.log('column check')
-        colCheck()
-    }
-    if (winStatus !== 'none') {
-        return
-    }
-    diagCheck()
-}
-
 // Turn Alternator (Implented at end of gameBox click event):
 function changeTurn() {
     if (currentTurn === 'crosses') {
@@ -111,6 +126,7 @@ function changeTurn() {
     }
 }
 
+// Gamebox event listener
 gameBox.addEventListener('click', function(event) {
     var selectedSpace = event.target
     if (selectedSpace.classList.contains('locked') === true) {
@@ -118,8 +134,11 @@ gameBox.addEventListener('click', function(event) {
     } else {
         selectedSpace.classList.add(currentTurn, 'locked')
     }
+    checkForDraw()
     checkForWin()
-    if (winStatus !== 'none') {
+    if (winStatus === 'draw') {
+        onDraw()
+    } else if (winStatus !== 'none') {
         onWin()
     } else {
         changeTurn()
