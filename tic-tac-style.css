@@ -19,3 +19,15 @@
     border-left: 5px solid black;
     border-right: 5px solid black;
 }
+.crosses {
+    background-image: url(./image_assets/cross_image.png);
+    background-size: 200px 200px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.noughts {
+    background-image: url(./image_assets/circle_image.png);
+    background-size: 200px 200px;
+    background-repeat: no-repeat;
+    background-position: center;
+}

@@ -1,35 +1,39 @@
 // Variable assignment for game box:
 var gameBox = document.querySelector('.gamebox')
-var currentTurn = 'noughts'
+var currentTurn = 'crosses'
+var winStatus = 'none'
 var turnText = document.querySelector('h2')
-var gameGrid = [['top left', 'top center', 'top right'], ['mid left', 'mid center', 'mid right'], ['bot left', 'bot center', 'bot right']]
 
 function checkForWin() {
-    var toCheck
-    for (r = 0; r < gameGrid.length; r++) {
-        toCheck = document.querySelector(gameGrid[r])
-        console.log(toCheck)
+    var toCheck = gameBox.children
+    var checkCount = 0
+    for (i = 0; i < toCheck.length; i += 3) {
+        if (toCheck[i].classList.contains(currentTurn) === true) {
+            checkCount += 1
+        }
+    }
+    if (checkCount === 3) {
+        winStatus = currentTurn
     }
 }
 
+// Turn Alternator (Implented at end of gameBox click event):
 function changeTurn() {
-    if (currentTurn === 'noughts') {
-        currentTurn = 'crosses'
+    if (currentTurn === 'crosses') {
+        currentTurn = 'noughts'
         turnText.textContent = "Player O's turn:"
     } else {
-        currentTurn = 'noughts'
+        currentTurn = 'crosses'
         turnText.textContent = "Player X's turn:"
     }
 }
 
 gameBox.addEventListener('click', function(event) {
     var selectedSpace = event.target
-    if (selectedSpace.classList.contains('noughts') === true || selectedSpace.classList.contains('crosses') === true) {
+    if (selectedSpace.classList.contains('crosses') === true || selectedSpace.classList.contains('noughts') === true) {
         return
-    } else if (currentTurn === 'noughts') {
-        selectedSpace.classList.add('noughts')
     } else {
-        selectedSpace.classList.add('crosses')
+        selectedSpace.classList.add(currentTurn)
     }
     checkForWin()
     changeTurn()
