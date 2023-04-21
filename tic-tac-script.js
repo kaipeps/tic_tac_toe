@@ -1,6 +1,7 @@
 // Variable assignment for game box:
 var gameBox = document.querySelector('.gamebox')
 var currentTurn = 'noughts'
+var turnText = document.querySelector('h2')
 var gameGrid = [['top left', 'top center', 'top right'], ['mid left', 'mid center', 'mid right'], ['bot left', 'bot center', 'bot right']]
 
 function checkForWin() {
@@ -14,8 +15,10 @@ function checkForWin() {
 function changeTurn() {
     if (currentTurn === 'noughts') {
         currentTurn = 'crosses'
+        turnText.textContent = "Player O's turn:"
     } else {
         currentTurn = 'noughts'
+        turnText.textContent = "Player X's turn:"
     }
 }
 
