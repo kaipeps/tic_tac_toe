@@ -1,12 +1,15 @@
 // Variable assignment for game box:
 var gameBox = document.querySelector('.gamebox')
-var topRow = Array.from(document.querySelectorAll('.top'))
-var midRow = Array.from(document.querySelectorAll('.mid'))
-var botRow = Array.from(document.querySelectorAll('.bot'))
-var leftCol = Array.from(document.querySelectorAll('.left'))
-var centerCol = Array.from(document.querySelectorAll('.center'))
-var rightCol = Array.from(document.querySelectorAll('.right'))
 var currentTurn = 'noughts'
+var gameGrid = [['top left', 'top center', 'top right'], ['mid left', 'mid center', 'mid right'], ['bot left', 'bot center', 'bot right']]
+
+function checkForWin() {
+    var toCheck
+    for (r = 0; r < gameGrid.length; r++) {
+        toCheck = document.querySelector(gameGrid[r])
+        console.log(toCheck)
+    }
+}
 
 function changeTurn() {
     if (currentTurn === 'noughts') {
@@ -25,5 +28,6 @@ gameBox.addEventListener('click', function(event) {
     } else {
         selectedSpace.classList.add('crosses')
     }
+    checkForWin()
     changeTurn()
 })
