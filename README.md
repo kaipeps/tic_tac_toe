@@ -1,15 +1,9 @@
 # tic_tac_toe
 First project for SEIr62
-## :computer: [Click here](#) to see my live project!
+## :computer: [Click here](https://kaipeps.github.io/tic_tac_toe/) to see my live project!
 ## :page_facing_up: About
-- How to use my awesome project.
-- Download instructions (if relevant):
-```
-$ git clone my-awesome-app
-$ cd my-awesome-app
-$node app.js
-```
-- Add in-app screenshots
+- Just head to the above website and it's ready to go!
+![screenshot](./image_assets/website_screenshot_1.png)
 ## :pencil: Planning & Problem Solving
 - Talk about the approach to the problem.
 - Add screenshots/drawings of the doodles/plans during the planning phase.
@@ -21,9 +15,7 @@ $node app.js
 - Animations
 - Anything else you'd be proud to show your parents
 ## :scream: Bugs to fix :poop:
-- Anything a little broken
-- Anything a LOT broken
-- Buttons to not click too many times (because its broken :unamused:)
+- Handling a click & drag? currently it changes the center square to an x and switches turn but doesn't actually add the classes to the section.
 ## :sob: Lessons learnt
 What I would do differently if I could wind back the clock
 ## :white_check_mark: Future features

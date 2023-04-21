@@ -1,14 +1,37 @@
-* {
-    border: 1px solid red;
+/* * {
+    box-sizing: border-box;
+    border: 1px solid black;
+} */
+body {
+    background-color: tomato;
+    font-family: 'Shantell Sans', cursive;
+    font-size: 1.5em;
 }
 h1 {
+    font-family: 'Sigmar', cursive;
     text-align: center;
+    background-color: rgb(255, 152, 134);
+    border: 3px solid black;
+    border-radius: 10px;
+    margin: 0.5em 0;
+}
+h2 {
+    margin: 0.5em 0 0.25em 0;
+    text-decoration: underline;
+}
+main {
+    width: 700px;
+    margin: 0 auto;
 }
 .gamebox {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     max-width: min-content;
     margin: 0 auto;
+    padding: 30px;
+    border: 5px solid black;
+    background-color: white;
+    border-radius: 20px;
 }
 .gamebox section {
     width: 200px;
