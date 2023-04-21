@@ -10,11 +10,9 @@ var gameGrid = [topRow, midRow, botRow]
 
 function rowCheck() {
     var checkCount = 0
-    for (c = 0; c < gameGrid[r].length; c++) {
-        console.log(gameGrid[r][c].classList)
-        if (gameGrid[r][c].classList.contains(currentTurn) === true) {
+    for (y = 0; y < 3; y++) {
+        if (gameGrid[x][y].classList.contains(currentTurn) === true) {
             checkCount++
-            console.log(checkCount)
         }
     }
     if (checkCount === 3) {
@@ -26,23 +24,55 @@ function rowCheck() {
 }
 function colCheck() {
     var checkCount = 0
-    for (c = 0; c < gameGrid[r].length; c++) {
-        toCheck = gameGrid
-        // if (toCheck[r].classList.contains(currentTurn) === true) {
-        //     checkCount++
-        // }
-        // if (checkCount === 3) {
-        //     winStatus = currentTurn
-        // } else {
-        //     checkCount = 0
-        // }
+    for (x = 0; x < 3; x++) {
+        if (gameGrid[x][y].classList.contains(currentTurn) === true) {
+            checkCount++
+            console.log(checkCount)
+        }
+    }
+    if (checkCount === 3) {
+        winStatus = currentTurn
+        return
+    } else {
+        checkCount = 0
     }
 }
 function diagCheck() {
-
+    var checkCount = 0
+    // Forward Diagonal
+    for (d = 0; d < 3; d++) {
+        if (gameGrid[d][d].classList.contains(currentTurn) === true) {
+            checkCount++
+            console.log(checkCount)
+        }
+    }
+    if (checkCount === 3) {
+        winStatus = currentTurn
+        return
+    } else {
+        checkCount = 0
+    }
+    // Backward Diagonal
+    for (x = 0; x < 3; x++) {
+        for (y = 2; y >= 0; y--) {
+            if (gameGrid[x][y].classList.contains(currentTurn) === true) {
+                checkCount++
+                console.log(checkCount)
+            }
+        }
+    }
+    if (checkCount === 3) {
+        winStatus = currentTurn
+        return
+    } else {
+        checkCount = 0
+    }
 }
 
-function displayWin() {
+function onWin() {
+    for (i = 0; i < gameBox.children.length; i++) {
+        gameBox.children[i].classList.add('locked')
+    }
     if (winStatus === 'crosses') {
         gameText.style.textAlign = 'center'
         gameText.textContent = 'Player X has won!'
@@ -53,11 +83,17 @@ function displayWin() {
 }
 
 function checkForWin() {
-    rowCheck()
+    for (x = 0; x < 3; x++) {
+        console.log('row check')
+        rowCheck()
+    }
     if (winStatus !== 'none') {
         return
     }
-    colCheck()
+    for (y = 0; y < 3; y++) {
+        console.log('column check')
+        colCheck()
+    }
     if (winStatus !== 'none') {
         return
     }
@@ -77,14 +113,14 @@ function changeTurn() {
 
 gameBox.addEventListener('click', function(event) {
     var selectedSpace = event.target
-    if (selectedSpace.classList.contains('crosses') === true || selectedSpace.classList.contains('noughts') === true) {
+    if (selectedSpace.classList.contains('locked') === true) {
         return
     } else {
-        selectedSpace.classList.add(currentTurn)
+        selectedSpace.classList.add(currentTurn, 'locked')
     }
     checkForWin()
     if (winStatus !== 'none') {
-        displayWin()
+        onWin()
     } else {
         changeTurn()
     }
