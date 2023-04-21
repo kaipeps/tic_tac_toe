@@ -3,19 +3,17 @@ var gameBox = document.querySelector('.gamebox')
 var currentTurn = 'crosses'
 var winStatus = 'none'
 var gameText = document.querySelector('h2')
-var topRow = Array.from(document.querySelectorAll('.top'))
-var midRow = Array.from(document.querySelectorAll('.mid'))
-var botRow = Array.from(document.querySelectorAll('.bot'))
+var topRow = document.querySelectorAll('.top')
+var midRow = document.querySelectorAll('.mid')
+var botRow = document.querySelectorAll('.bot')
 var gameGrid = [topRow, midRow, botRow]
 
 // Functions to check row/column/diagonal win conditions
 function rowCheck() {
     var checkCount = 0
     for (y = 0; y < 3; y++) {
-        console.log('x' + x + ', y' + y)
         if (gameGrid[x][y].classList.contains(currentTurn) === true) {
             checkCount++
-            console.log(checkCount)
         }
     }
     if (checkCount === 3) {
@@ -26,10 +24,8 @@ function rowCheck() {
 function colCheck() {
     var checkCount = 0
     for (x = 0; x < 3; x++) {
-        console.log('x' + x + ', y' + y)
         if (gameGrid[x][y].classList.contains(currentTurn) === true) {
             checkCount++
-            console.log(checkCount)
         }
     }
     if (checkCount === 3) {
@@ -41,10 +37,8 @@ function diagCheck() {
     var checkCount = 0
     // Forward Diagonal
     for (d = 0; d < 3; d++) {
-        console.log('x' + d + ', y' + d)
         if (gameGrid[d][d].classList.contains(currentTurn) === true) {
             checkCount++
-            console.log(checkCount)
         }
     }
     if (checkCount === 3) {
@@ -56,10 +50,8 @@ function diagCheck() {
     // Backward Diagonal
     var y = 2
     for (x = 0; x < 3; x++) {
-        console.log('x' + x + ', y' + y)
         if (gameGrid[x][y].classList.contains(currentTurn) === true) {
             checkCount++
-            console.log(checkCount)
         }
         y--
     }
