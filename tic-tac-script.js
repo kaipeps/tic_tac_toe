@@ -3,22 +3,46 @@ var gameBox = document.querySelector('.gamebox')
 var currentTurn = 'crosses'
 var winStatus = 'none'
 var gameText = document.querySelector('h2')
+var topRow = Array.from(document.querySelectorAll('.top'))
+var midRow = Array.from(document.querySelectorAll('.mid'))
+var botRow = Array.from(document.querySelectorAll('.bot'))
+var gameGrid = [topRow, midRow, botRow]
 
-function checkForWin() {
-    var toCheck = gameBox.children
-    var rowCount = 0
-    var columnCount = 0
-    var diagonalCount = 0
-    for (i = 0; i < toCheck.length; i++) {
-        // winStatus = currentTurn
+function rowCheck() {
+    var checkCount = 0
+    for (c = 0; c < gameGrid[r].length; c++) {
+        console.log(gameGrid[r][c].classList)
+        if (gameGrid[r][c].classList.contains(currentTurn) === true) {
+            checkCount++
+            console.log(checkCount)
+        }
     }
-    for (i = 0; i < toCheck.length; i += 3) {
-        // winStatus = currentTurn
+    if (checkCount === 3) {
+        winStatus = currentTurn
+        return
+    } else {
+        checkCount = 0
     }
-    for (i = 0; i < toCheck.length; i += 4) {
-        // winStatus = currentTurn
+}
+function colCheck() {
+    var checkCount = 0
+    for (c = 0; c < gameGrid[r].length; c++) {
+        toCheck = gameGrid
+        // if (toCheck[r].classList.contains(currentTurn) === true) {
+        //     checkCount++
+        // }
+        // if (checkCount === 3) {
+        //     winStatus = currentTurn
+        // } else {
+        //     checkCount = 0
+        // }
     }
-    for (i = 2; i < 7; i += 2)
+}
+function diagCheck() {
+
+}
+
+function displayWin() {
     if (winStatus === 'crosses') {
         gameText.style.textAlign = 'center'
         gameText.textContent = 'Player X has won!'
@@ -26,6 +50,18 @@ function checkForWin() {
         gameText.style.textAlign = 'center'
         gameText.textContent = 'Player O has won!'
     }
+}
+
+function checkForWin() {
+    rowCheck()
+    if (winStatus !== 'none') {
+        return
+    }
+    colCheck()
+    if (winStatus !== 'none') {
+        return
+    }
+    diagCheck()
 }
 
 // Turn Alternator (Implented at end of gameBox click event):
@@ -47,5 +83,9 @@ gameBox.addEventListener('click', function(event) {
         selectedSpace.classList.add(currentTurn)
     }
     checkForWin()
-    changeTurn()
+    if (winStatus !== 'none') {
+        displayWin()
+    } else {
+        changeTurn()
+    }
 })
