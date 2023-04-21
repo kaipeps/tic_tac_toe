@@ -2,18 +2,29 @@
 var gameBox = document.querySelector('.gamebox')
 var currentTurn = 'crosses'
 var winStatus = 'none'
-var turnText = document.querySelector('h2')
+var gameText = document.querySelector('h2')
 
 function checkForWin() {
     var toCheck = gameBox.children
-    var checkCount = 0
-    for (i = 0; i < toCheck.length; i += 3) {
-        if (toCheck[i].classList.contains(currentTurn) === true) {
-            checkCount += 1
-        }
+    var rowCount = 0
+    var columnCount = 0
+    var diagonalCount = 0
+    for (i = 0; i < toCheck.length; i++) {
+        // winStatus = currentTurn
     }
-    if (checkCount === 3) {
-        winStatus = currentTurn
+    for (i = 0; i < toCheck.length; i += 3) {
+        // winStatus = currentTurn
+    }
+    for (i = 0; i < toCheck.length; i += 4) {
+        // winStatus = currentTurn
+    }
+    for (i = 2; i < 7; i += 2)
+    if (winStatus === 'crosses') {
+        gameText.style.textAlign = 'center'
+        gameText.textContent = 'Player X has won!'
+    } else if (winStatus === 'noughts') {
+        gameText.style.textAlign = 'center'
+        gameText.textContent = 'Player O has won!'
     }
 }
 
@@ -21,10 +32,10 @@ function checkForWin() {
 function changeTurn() {
     if (currentTurn === 'crosses') {
         currentTurn = 'noughts'
-        turnText.textContent = "Player O's turn:"
+        gameText.textContent = "Player O's turn:"
     } else {
         currentTurn = 'crosses'
-        turnText.textContent = "Player X's turn:"
+        gameText.textContent = "Player X's turn:"
     }
 }
 

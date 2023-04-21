@@ -1,6 +1,9 @@
 * {
     border: 1px solid red;
 }
+h1 {
+    text-align: center;
+}
 .gamebox {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
