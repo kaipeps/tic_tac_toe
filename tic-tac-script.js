@@ -77,14 +77,8 @@ function checkForWin() {
     for (x = 0; x < 3; x++) {
         rowCheck()
     }
-    if (winStatus !== 'none') {
-        return
-    }
     for (y = 0; y < 3; y++) {
         colCheck()
-    }
-    if (winStatus !== 'none') {
-        return
     }
     diagCheck()
 }
@@ -121,18 +115,20 @@ function changeTurn() {
 // Gamebox event listener
 gameBox.addEventListener('click', function(event) {
     var selectedSpace = event.target
-    if (selectedSpace.classList.contains('locked') === true) {
-        return
-    } else {
-        selectedSpace.classList.add(currentTurn, 'locked')
-    }
-    checkForDraw()
-    checkForWin()
-    if (winStatus === 'draw') {
-        onDraw()
-    } else if (winStatus !== 'none') {
-        onWin()
-    } else {
-        changeTurn()
+    if (selectedSpace.classList.contains('gamebox') === false) {
+        if (selectedSpace.classList.contains('locked') === true) {
+            return
+        } else {
+            selectedSpace.classList.add(currentTurn, 'locked')
+        }
+        checkForDraw()
+        checkForWin()
+        if (winStatus === 'draw') {
+            onDraw()
+        } else if (winStatus !== 'none') {
+            onWin()
+        } else {
+            changeTurn()
+        }
     }
 })
