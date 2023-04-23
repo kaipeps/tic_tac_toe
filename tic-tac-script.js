@@ -2,11 +2,14 @@
 var gameBox = document.querySelector('.gamebox')
 var currentTurn = 'crosses'
 var winStatus = 'none'
+var crossesWins = 0
+var noughtsWins = 0
 var gameText = document.querySelector('h2')
 var topRow = document.querySelectorAll('.top')
 var midRow = document.querySelectorAll('.mid')
 var botRow = document.querySelectorAll('.bot')
 var gameGrid = [topRow, midRow, botRow]
+var scoreText = document.querySelector('h3')
 
 // Functions to check row/column/diagonal win conditions
 function rowCheck() {
@@ -85,7 +88,8 @@ function checkForWin() {
 
 function onDraw() {
     gameText.style.textAlign = 'center'
-    gameText.textContent = "It's a draw!"
+    gameText.textContent = "It's a draw! Click here to reset the board."
+    gameText.classList.toggle('reset-active')
 }
 
 function onWin() {
@@ -93,12 +97,17 @@ function onWin() {
         gameBox.children[i].classList.add('locked')
     }
     if (winStatus === 'crosses') {
+        crossesWins += 1
         gameText.style.textAlign = 'center'
-        gameText.textContent = 'Player X has won!'
+        gameText.textContent = 'Player X has won! Click here to reset the board.'
     } else if (winStatus === 'noughts') {
+        noughtsWins += 1
         gameText.style.textAlign = 'center'
-        gameText.textContent = 'Player O has won!'
+        gameText.textContent = 'Player O has won! Click here to reset the board.'
     }
+    gameText.classList.toggle('reset-active')
+    var scoreTextArray = ['Scores - X\'s: ', crossesWins, ' - O\'s: ', noughtsWins]
+    scoreText.textContent = scoreTextArray.join('')
 }
 
 // Turn Alternator (Implented at end of gameBox click event):
@@ -130,5 +139,23 @@ gameBox.addEventListener('click', function(event) {
         } else {
             changeTurn()
         }
+    }
+})
+
+function reset() {
+    winStatus = 'none'
+    currentTurn = 'crosses'
+    gameText.textContent = "Player X's turn:"
+    gameText.style.textAlign = 'initial'
+    gameText.classList.toggle('reset-active')
+    for (i = 0; i < gameBox.children.length; i++) {
+        gameBox.children[i].classList.remove('noughts', 'crosses', 'locked')
+    }
+}
+
+// Reset event listener
+gameText.addEventListener('click', function() {
+    if (gameText.classList.contains('reset-active')) {
+        reset()
     }
 })
