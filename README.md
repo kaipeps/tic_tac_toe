@@ -3,7 +3,7 @@ First project for SEIr62
 ## :computer: [Click here](https://kaipeps.github.io/tic_tac_toe/) to see my live project!
 ## :page_facing_up: About
 - Just head to the above website and it's ready to go!
-![screenshot](./image_assets/website_screenshot_1.png)
+![screenshot](./image_assets/final_screenshot.png)
 ## :pencil: Planning & Problem Solving
 - When I first got the brief for the project, I wanted to be sure I at least had the core of it planned out and ready to go before I started any code.
 ![planning](./image_assets/original_planning.jpg)
