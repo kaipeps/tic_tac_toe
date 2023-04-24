@@ -29,3 +29,4 @@ If I were to continue expanding on this as a side project, I would:
 - Do some media query work to make it playable from my phone on the go.
 - Look into server-side storage to hold data between games.
 - Do some reading on modal pop-ups and include one when the game is won to reset rather than just changing the turn text.
+- Draft out some objects to group related variables and make declaration more readable
